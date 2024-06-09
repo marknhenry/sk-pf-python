@@ -84,3 +84,37 @@ async Task testOpenAI(Kernel kernel)
     Console.WriteLine(result);
 }
 ```
+
+# Setting up Service Principal
+
+A service principal with *Contributor* and *User Access Administrator* rights needs to be generated for authentication and authorization from GitHub or Azure DevOps to your Azure subscription. This is required to deploy resources to your environment.
+
+## Create Service Principal
+
+First, go to the Azure Portal to find the ID of your subscription. Then start the Cloud Shell or Azure CLI, login to Azure, set the Azure context and execute the following commands to generate the required credentials:
+
+**Azure CLI:**
+
+```sh
+# Replace {service-principal-name} and {subscription-id} with your
+# Azure subscription id and any name for your service principal.
+az ad sp create-for-rbac \
+  --name "{service-principal-name}" \
+  --role "Contributor" \
+  --scopes "/subscriptions/{subscription-id}" \
+  --sdk-auth
+```
+
+This will generate the following JSON output:
+
+```json
+{
+  "clientId": "<GUID>",
+  "clientSecret": "<GUID>",
+  "subscriptionId": "<GUID>",
+  "tenantId": "<GUID>",
+  (...)
+}
+```
+
+> **Note:** Take note of the output. It will be required for the next steps.
