@@ -1,8 +1,8 @@
 # MMLOps Starter
-
 [![Mark Henry](https://img.shields.io/static/v1?label=Author&message=Mark%20Henry&color=success)](https://www.linkedin.com/in/marknhenry/) 
 [![License](https://img.shields.io/static/v1?label=License&message=MIT&color=blue)](https://www.linkedin.com/in/marknhenry/)
 
+## Deployment Status
 ![CI/CD Pipeline](https://github.com/marknhenry/sk-pf-python/actions/workflows/github-actions-demo.yml/badge.svg)
 
 ## To Setup A New Project
