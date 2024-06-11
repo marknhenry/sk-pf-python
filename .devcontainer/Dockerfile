@@ -9,6 +9,8 @@ RUN apt-get update  \
     && ln -fs /usr/share/zoneinfo/Asia/Dubai /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata \
     && apt-get install -y wget graphviz libgraphviz-dev unzip git sudo \
+    && sudo apt-get install -y dotnet-sdk-8.0 \
+    && sudo apt-get install -y aspnetcore-runtime-8.0 \
     && rm -rf /var/lib/apt/lists/*
 
 # Github CLI Installation
@@ -20,24 +22,19 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | s
     && sudo apt update \
     && sudo apt install gh -y
 
-# # Miniconda Installation
-# RUN wget \
-#     https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
-#     && mkdir /root/.conda \
-#     && bash Miniconda3-latest-Linux-x86_64.sh -b \
-#     && rm -f Miniconda3-latest-Linux-x86_64.sh 
+# Installing Azure CLI
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# RUN conda update -n base -c defaults conda -y \
-#     && conda init bash \
-#     && conda install -y numpy pandas matplotlib scipy sympy autopep8 requests \
-#     && conda install -c conda-forge notebook \
-#     && conda clean -a \
-#     && pip install -y python-dotenv openai requests tiktoken
+# Miniconda Installation
+RUN wget \
+    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+    && mkdir /root/.conda \
+    && bash Miniconda3-latest-Linux-x86_64.sh -b \
+    && rm -f Miniconda3-latest-Linux-x86_64.sh 
 
-# # Installing Azure CLI
-# RUN curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
-# # Intalling .Net SDK
-# RUN sudo apt-get update \
-#   && sudo apt-get install -y dotnet-sdk-8.0 \
-#   && sudo apt-get install -y aspnetcore-runtime-8.0
+RUN conda update -n base -c defaults conda -y \
+    && conda init bash \
+    && conda install -y numpy pandas matplotlib scipy sympy autopep8 requests \
+    && conda install -c conda-forge notebook -y \
+    && conda clean -a -y \
+    && pip install python-dotenv openai requests tiktoken
