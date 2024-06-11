@@ -20,19 +20,19 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | s
     && sudo apt update \
     && sudo apt install gh -y
 
-# # Miniconda Installation
-# RUN wget \
-#     https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
-#     && mkdir /root/.conda \
-#     && bash Miniconda3-latest-Linux-x86_64.sh -b \
-#     && rm -f Miniconda3-latest-Linux-x86_64.sh 
+# Miniconda Installation
+RUN wget \
+    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+    && mkdir /root/.conda \
+    && bash Miniconda3-latest-Linux-x86_64.sh -b \
+    && rm -f Miniconda3-latest-Linux-x86_64.sh 
 
-# RUN conda update -n base -c defaults conda -y \
-#     && conda init bash \
-#     && conda install -y numpy pandas matplotlib scipy sympy autopep8 requests \
-#     && conda install -c conda-forge notebook \
-#     && conda clean -a \
-#     && pip install -y python-dotenv openai requests tiktoken
+RUN conda update -n base -c defaults conda -y \
+    && conda init bash \
+    && conda install -y numpy pandas matplotlib scipy sympy autopep8 requests \
+    && conda install -c conda-forge notebook \
+    && conda clean -a \
+    && pip install -y python-dotenv openai requests tiktoken
 
 # Installing Azure CLI
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
